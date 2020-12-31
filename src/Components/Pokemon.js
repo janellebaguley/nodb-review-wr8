@@ -18,6 +18,10 @@ class Pokemon extends Component {
     handleToggle = () => {
         this.setState({isEditing: !this.state.isEditing})
     }
+    handleEdit =(id) => {
+        this.props.nameFn(id, this.state.nameInput)
+        this.handleToggle()
+    }
 
     render(){
         return (
@@ -29,7 +33,7 @@ class Pokemon extends Component {
                         <input 
                             value={this.state.nameInput}
                             onChange={e => this.handleInput(e.target.value)}/>
-                        <button>Submit</button>
+                        <button onClick = {() => this.handleEdit(this.props.pokemon.id)}>Submit</button>
                     </div>
                 )
                 : (
@@ -38,7 +42,7 @@ class Pokemon extends Component {
                         <button onClick={this.handleToggle}>Edit Name</button>
                     </div>
                 )}
-                <button>Release</button>
+                <button onClick = {() => this.props.releaseFn(this.props.pokemon.id)}>Release</button>
             </div>
         )
     }
